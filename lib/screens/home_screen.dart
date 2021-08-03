@@ -16,7 +16,6 @@ class _HomeScreenState extends State<HomeScreen> {
   late Widget _selectButton2 = _selectButton("scissors.png", 2);
   late Widget _selectButton3 = _selectButton("paper.png", 3);
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
     print("選択した手:$selectNumber");
     print(_judgeString);
 
-    _resultView(_judgeString, selectNumber);
+    _resultView(_judgeString, selectNumber, _randInt);
   }
 
   String _judge(int randInt, int selectNumber) {
@@ -119,8 +118,11 @@ class _HomeScreenState extends State<HomeScreen> {
     return _judgeString;
   }
 
-  void _resultView(String _judgeString, int selectNumber) {
+  void _resultView(String _judgeString, int selectNumber, int randInt) {
     setState(() {
+      String _cpuSelectText = "";
+      Widget _cpuSelectImage = Container();
+
       if (selectNumber == 1) {
         _imageWidget = Image.asset("assets/images/rock.png");
       } else if (selectNumber == 2) {
@@ -129,12 +131,26 @@ class _HomeScreenState extends State<HomeScreen> {
         _imageWidget = Image.asset("assets/images/paper.png");
       }
 
+      if (randInt == 1) {
+        _cpuSelectText = "相手はグーを出しました";
+        _cpuSelectImage = Image.asset("assets/images/rock.png");
+      } else if (randInt == 2) {
+        _cpuSelectText = "相手はチョキを出しました";
+        _cpuSelectImage = Image.asset("assets/images/scissors.png");
+      } else {
+        _cpuSelectText = "相手はパーを出しました";
+        _cpuSelectImage = Image.asset("assets/images/paper.png");
+      }
+
       _textHeader = _judgeString;
 
-      _selectButton1 = Container();
-      _selectButton2 = Container();
-      _selectButton3 = Container();
-
+      Row(
+        children: [
+          _selectButton1 = _cpuSelectImage,
+          _selectButton2 = Text(_cpuSelectText),
+          _selectButton3 = Container(),
+        ],
+      );
     });
   }
 }
