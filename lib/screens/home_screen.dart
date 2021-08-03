@@ -12,9 +12,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _imageWidget = Image.asset("assets/images/hatena.png");
   String _textHeader = "出す手を選択してください";
 
-  late Widget _selectButton1;
-  late Widget _selectButton2;
-  late Widget _selectButton3;
+  late Widget _selectButton1 = _selectButton("rock.png", 1);
+  late Widget _selectButton2 = _selectButton("scissors.png", 2);
+  late Widget _selectButton3 = _selectButton("paper.png", 3);
 
 
   @override
@@ -39,19 +39,19 @@ class _HomeScreenState extends State<HomeScreen> {
               Expanded(
                   flex: 1,
                   child: Visibility(
-                    child: _selectButton1 = _selectButton("rock.png", 1),
+                    child: _selectButton1,
                     visible: true,
                   )),
               Expanded(
                   flex: 1,
                   child: Visibility(
-                    child: _selectButton2 = _selectButton("scissors.png", 2),
+                    child: _selectButton2,
                     visible: true,
                   )),
               Expanded(
                   flex: 1,
                   child: Visibility(
-                    child: _selectButton3 = _selectButton("paper.png", 3),
+                    child: _selectButton3,
                     visible: true,
                   )),
             ],
@@ -131,21 +131,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
       _textHeader = _judgeString;
 
-
-      Visibility(
-        child: _selectButton1,
-        visible: false,
-      );
-
-      Visibility(
-        child: _selectButton2,
-        visible: false,
-      );
-
-      Visibility(
-        child: _selectButton3,
-        visible: false,
-      );
+      _selectButton1 = Container();
+      _selectButton2 = Container();
+      _selectButton3 = Container();
 
     });
   }
